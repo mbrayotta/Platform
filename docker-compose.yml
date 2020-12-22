@@ -1,0 +1,9 @@
+services:
+  
+  db-server:
+    image: sql
+    build:
+      context: .
+      dockerfile: ApiOperations/Persistence/Dockerfile
+    ports:
+      - "1433:1433"

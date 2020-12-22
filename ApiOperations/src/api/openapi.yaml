@@ -1,0 +1,82 @@
+swagger: "2.0"
+info:
+  description: "this is a sample api to operate the sum of two arguments"
+  version: "1.0.0"
+  title: "Operations Api"
+  contact:
+    email: "mbrayotta@andreani.com"
+host: "localhost:5000"
+basePath: "/"
+tags:
+- name: "Operation"
+  description: "Add your numbers and get your result"
+schemes:
+- "http"
+paths:
+  /api/operations:
+    post:
+      tags:
+      - "Operation"
+      summary: "Add two numbers to store the result of both"
+      consumes:
+      - "application/json"
+      produces:
+      - "text/plain"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Operation object that needs to be added to store (the property 'total' and 'id' you should not add them)"
+        required: true
+        schema:
+          $ref: "#/definitions/Operation"
+      responses:
+        "202":
+          description: "Acepted"
+
+        
+  /api/results/{id}:
+    get:
+      tags:
+      - "Operation"
+      summary: "Find result by ID"
+      description: "Returns the current result of id operation"
+      operationId: "Select"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of operation to return"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Operation"
+        "404":
+          description: "not found"
+
+definitions:
+  Operation:
+    type: "object"
+    properties:
+      Id:
+        type: "integer"
+        format: "int32"
+      Type:
+        type: "string"
+      FirstArgument:
+        type: "integer"
+        format: "int32"
+      SecondArgument:
+        type: "integer"
+        format: "int32"
+      total:
+        type: "integer"
+        format: "int32"
+  
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
